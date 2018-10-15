@@ -21,9 +21,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Finchley.SR1</spring-cloud.version>
+		<spring-cloud-contract.version>1.2.1.RELEASE</spring-cloud-contract.version>
 	</properties>
 
 	<dependencies>
@@ -33,23 +33,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -72,19 +62,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.springframework.cloud</groupId> -->
-<!-- 				<artifactId>spring-cloud-contract-maven-plugin</artifactId> -->
-<!-- 				<version>${spring-cloud.version}</version> -->
-<!-- 				<extensions>true</extensions> -->
-<!-- 				<configuration> -->
-<!-- 					<baseClassForTests> -->
-<!-- 						com.urosht.demo.BaseControllerTests -->
-<!-- 					</baseClassForTests> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
+
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>${spring-cloud-contract.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>com.urosht.controller.BaseClass</baseClassForTests>
+				</configuration>
+			</plugin>
+
+
 		</plugins>
 	</build>
-
 
 </project>
