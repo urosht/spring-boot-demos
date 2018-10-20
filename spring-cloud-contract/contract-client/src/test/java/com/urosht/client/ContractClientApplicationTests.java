@@ -1,13 +1,13 @@
 package com.urosht.client;
 
-import org.assertj.core.api.BDDAssertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.junit.StubRunnerRule;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,24 +17,20 @@ public class ContractClientApplicationTests {
 
 	@Rule
 	public StubRunnerRule stubRunnerRule = new StubRunnerRule()
-		.downloadStub("com.example", "contract-rest-service", "0.0.1-SNAPSHOT", "stubs")
+		.downloadStub("com.urosht", "contract-provider", "0.0.1-SNAPSHOT", "stubs")
 		.withPort(8100)
 		.stubsMode(StubRunnerProperties.StubsMode.LOCAL);
 
 	@Test
-	public void get_person_from_service_contract() {
+	public void validate_when_endpoint_called_return_hello_contract() throws Exception {
 		// given:
-		RestTemplate restTemplate = new RestTemplate();
+			RestTemplate restTemplate = new RestTemplate();
 
 		// when:
-		ResponseEntity<Person> personResponseEntity = restTemplate.getForEntity("http://localhost:8100/person/1", Person.class);
+			String response = restTemplate.getForObject("http://localhost:8100/hello", String.class);
 
 		// then:
-		BDDAssertions.then(personResponseEntity.getStatusCodeValue()).isEqualTo(200);
-	}
-		
-	@Test
-	public void contextLoads() {
+			assertThat(response).isEqualTo("Hello World");
 	}
 	
 }
