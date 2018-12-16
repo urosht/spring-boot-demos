@@ -84,8 +84,4 @@ public class CassandraConfig extends org.springframework.data.cassandra.config.A
     return new String[] { "com.urosht.demo.entity" };
   }
 
-  @Bean
-  public CqlTemplate cqlTemplate() {
-    return new CqlTemplate(getRequiredSession());
-  }
 }

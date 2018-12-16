@@ -1,0 +1,62 @@
+piVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: cassandra
+  labels:
+    app: cassandra
+spec:
+  replicas: 3
+  serviceName: cassandra
+  selector:
+    matchLabels:
+      app: cassandra
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      containers:
+        - name: cassandra
+          image: cassandra:3.11.1
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "nodetool drain"]
+          ports:
+            - containerPort: 7000
+              name: intra-node
+            - containerPort: 7001
+              name: tls-intra-node
+            - containerPort: 7199
+              name: jmx
+            - containerPort: 9042
+              name: cql
+          env:
+            - name: CASSANDRA_SEEDS
+              value: "cassandra-0.cassandra,\
+                      cassandra-1.cassandra,\
+                      cassandra-2.cassandra"
+            - name: MAX_HEAP_SIZE
+              value: "512M"
+            - name: HEAP_NEWSIZE
+              value: "100M"
+            - name: CASSANDRA_CLUSTER_NAME
+              value: "demo-cluster"
+            - name: CASSANDRA_DC
+              value: "datacenter1"
+            - name: CASSANDRA_RACK
+              value: "rack1"
+            - name: CASSANDRA_ENDPOINT_SNITCH
+              value: "GossipingPropertyFileSnitch"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/cassandra
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

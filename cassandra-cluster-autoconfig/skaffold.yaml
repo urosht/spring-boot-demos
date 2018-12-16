@@ -1,0 +1,15 @@
+piVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+    - imageName: product-demo
+      docker:
+        dockerfilePath: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - k8s/app-deployment.yaml
+      - k8s/app-service.yaml
+      - k8s/cassandra-statefulset.yaml
+      - k8s/cassandra-service.yaml
+      - k8s/cassandra-expose-service.yaml
