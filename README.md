@@ -1,6 +1,6 @@
 # Spring Boot Demos
 
-### Demos with Spring Boot features
+### Demos with Spring Boot goodies
 
 ## Contents:
 
