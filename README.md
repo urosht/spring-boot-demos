@@ -9,4 +9,5 @@
 - **redis-caching-demo** - Caching with redis (1.5.xx)
 - **mysql-automapping-demo** - Generate mysql schema and table on startup (2.0.xx)
 - **spring-cloud-contract-demo** - Demo for Spring Cloud Contract (2.0.xx)
-- **cassandra-cluster-autoconfig - Cassandra autoconfigure keyspace, table, replication and ORM (2.1.xx) (K8S)
+- **cassandra-cluster-autoconfig** - Cassandra autoconfigure keyspace, table, replication and ORM (2.1.xx) (K8S)
+- **remote-k8s-debug-demo** - Debug a remote Kubernetes pod from the IDE (2.2.4) (K8S)
