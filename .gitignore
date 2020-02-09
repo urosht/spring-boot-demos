@@ -1,0 +1,34 @@
+# Eclipse
+.classpath
+/.project
+.settings/
+
+#IntelliJ
+*/.idea
+*/*.iml
+
+# Spring
+.springBeans
+
+# Maven
+log/
+/target/*
+/target/classes/*
+/target/classes/**/*.class
+*.lst
+*/mvnw
+*/mvnw.cmd
+*/.mvn/*
+
+# Hibernate
+hibernate*.xml
+
+# Gradle
+gradle/
+build.gradle
+gradlew
+gradlew.bat
+
+# Misc
+.svn
+META-INF/
