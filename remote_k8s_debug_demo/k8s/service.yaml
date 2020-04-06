@@ -6,11 +6,9 @@ metadata:
   labels:
     app: demo-app
 spec:
+  type: LoadBalancer
   selector:
     app: demo-app
   ports:
-    - name: web
-      port: 80
+    - port: 80
       targetPort: 8080
-    - name: debug
-      port: 5005

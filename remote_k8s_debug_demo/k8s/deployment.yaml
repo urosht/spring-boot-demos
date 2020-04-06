@@ -20,21 +20,6 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
-              name: web
-            - containerPort: 5005
-              name: debug
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
           env:
             - name: JAVA_OPTS
               value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
