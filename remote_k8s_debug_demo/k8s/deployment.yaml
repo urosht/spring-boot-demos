@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: urosht/demo-remote-debug
+          image: uroshtrifunovic/spring-boot-demo:remote-k8s-debug
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
