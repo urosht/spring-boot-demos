@@ -2,7 +2,6 @@ package com.urosht.demo.controller;
 
 import com.urosht.demo.entity.Cat;
 import com.urosht.demo.repository.CatRepository;
-import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,40 +19,40 @@ import javax.persistence.EntityNotFoundException;
 @RestController
 public class CatController {
 
-  final private static Logger LOG = LoggerFactory.getLogger("CatController");
+    final private static Logger LOG = LoggerFactory.getLogger("CatController");
 
-  private CatRepository repository;
+    private CatRepository repository;
 
-  public CatController(CatRepository repository) {
-    this.repository = repository;
-  }
-
-  @GetMapping("/get")
-  public Cat get(final Long id) {
-    return repository.findById(id).orElseThrow(EntityNotFoundException::new);
-  }
-
-  @PostMapping("/create")
-  @ResponseStatus(HttpStatus.CREATED)
-  public Cat create(@RequestBody final Cat cat) {
-    return repository.save(cat);
-  }
-
-  @PutMapping("/update/{id}")
-  public Cat update(@RequestBody final Cat newCat, @PathVariable Long id) {
-    if (repository.existsById(id)) {
-      newCat.setId(id);
-      return repository.save(newCat);
-    } else {
-      throw new EntityNotFoundException();
+    public CatController(CatRepository repository) {
+        this.repository = repository;
     }
-  }
 
-  @DeleteMapping("/delete/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable final Long id) {
-    final Cat cat = repository.findById(id).orElseThrow(EntityNotFoundException::new);
-    repository.delete(cat);
-  }
+    @GetMapping("/get")
+    public Cat get(final Long id) {
+        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cat create(@RequestBody final Cat cat) {
+        return repository.save(cat);
+    }
+
+    @PutMapping("/update/{id}")
+    public Cat update(@RequestBody final Cat newCat, @PathVariable Long id) {
+        if (repository.existsById(id)) {
+            newCat.setId(id);
+            return repository.save(newCat);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable final Long id) {
+        final Cat cat = repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        repository.delete(cat);
+    }
 
 }
