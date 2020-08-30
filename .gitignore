@@ -12,9 +12,9 @@
 
 # Maven
 log/
-/target/*
-/target/classes/*
-/target/classes/**/*.class
+*/target/*
+*/target/classes/*
+*/target/classes/**/*.class
 *.lst
 */mvnw
 */mvnw.cmd
